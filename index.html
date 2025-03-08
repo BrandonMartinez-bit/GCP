@@ -3,115 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seguridad Informática</title>
+    <title>Tabla de elementos de un CPD</title>
     <style>
+        /* Configuración del fondo verde bandera y colores del contenido */
         body {
+            background-color: #006847; /* Verde bandera */
+            color: black; /* Color del texto por defecto */
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
         }
-        .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
-        }
-        header {
-            background: #333;
-            color: #fff;
-            padding-top: 30px;
-            min-height: 70px;
-            border-bottom: #77aaff 3px solid;
-        }
-        header a {
-            color: #fff;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 16px;
-        }
-        header ul {
-            padding: 0;
-            list-style: none;
-        }
-        header li {
-            float: left;
-            display: inline;
-            padding: 0 20px 0 20px;
-        }
-        header #branding {
-            float: left;
-        }
-        header #branding h1 {
-            margin: 0;
-        }
-        header nav {
-            float: right;
-            margin-top: 10px;
-        }
-        .showcase {
-            min-height: 400px;
-            background: url('https://www.kindpng.com/imgv/TomJmwR_escudo-de-la-uaemex-png-download-universidad-autnoma/') no-repeat center center/cover;
-            text-align: center;
-            color: #fff;
-        }
-        .showcase h1 {
-            margin-top: 100px;
-            font-size: 55px;
-            margin-bottom: 10px;
-        }
-        .showcase p {
-            font-size: 20px;
-        }
-        .content {
+        .contenedor {
+            background-color: white;
+            margin: 20px auto;
             padding: 20px;
-            background: #fff;
-        }
-        footer {
-            background: #333;
-            color: #fff;
+            border-radius: 10px;
+            max-width: 900px;
             text-align: center;
-            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h1, h2, h3 {
+            color: #000080; /* Azul */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
             margin-top: 20px;
+        }
+        th {
+            background-color: #FF0000; /* Rojo */
+            color: white;
+            padding: 10px;
+        }
+        td {
+            border: 1px solid #000; /* Negro */
+            padding: 10px;
+        }
+        img {
+            max-width: 150px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div id="branding">
-                <h1>Universidad Autónoma del Estado de México</h1>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#">Inicio</a></li>
-                    <li><a href="#">Metodologías</a></li>
-                    <li><a href="#">Contacto</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <section class="showcase">
-        <div class="container">
-            <h1>Seguridad Informática</h1>
-            <p>Facultad de Ingeniería</p>
-            <p>Materia: Seguridad Informática</p>
-            <p>Nombre: Brandon</p>
-            <p>Tema: Metodologías más usuales para la seguridad informática</p>
-        </div>
-    </section>
-
-    <section class="content container">
-        <h2>Metodologías más usuales para la seguridad informática</h2>
-        <p>Las metodologías más comunes para la seguridad informática incluyen:</p>
-        <ul>
-            <li><strong>ISSAF:</strong> Information Systems Security Assessment Framework.</li>
-            <li><strong>OWASP:</strong> Open Web Application Security Project.</li>
-            <li><strong>OSSTMM:</strong> Open Source Security Testing Methodology Manual.</li>
-            <li><strong>ISO/IEC 27000:</strong> Familia de estándares para la gestión de la seguridad de la información.</li>
-        </ul>
-    </section>
-
-    <footer>
-        <p>Universidad Autónoma del Estado de México &copy; 2025</p>
-    </footer>
+    <div class="contenedor">
+        <!-- Aquí va la imagen del escudo -->
+        <img src="escudo.png" alt="Escudo UAEM">
+        <h1>Facultad de Contaduría y Administración</h1>
+        <h2>Instalaciones y Seguridad Informática</h2>
+        <h3>Nombre del estudiante: Ángel Brandon Martínez Rodríguez</h3>
+        <h3>Tema: Tabla con los elementos de un CPD</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Elemento</th>
+                    <th>Características</th>
+                    <th>Estándares</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Climatización</td>
+                    <td>Sistemas avanzados de control de temperatura y humedad para garantizar un ambiente óptimo para los equipos. Incluye sensores que monitorean constantemente las condiciones ambientales.</td>
+                    <td>Mantener la temperatura a 23°C con una tolerancia máxima de ±1°C y la humedad relativa entre el 40% y el 60%, conforme a la norma ASHRAE TC 9.9.</td>
+                </tr>
+                <tr>
+                    <td>Alimentación eléctrica</td>
+                    <td>Implementación de fuentes de energía redundantes, sistemas UPS (Uninterruptible Power Supply) y generadores de respaldo para garantizar un suministro continuo de energía.</td>
+                    <td>Basado en las recomendaciones de la norma IEEE 446, que establece las mejores prácticas para sistemas eléctricos de respaldo en centros de datos.</td>
+                </tr>
+                <tr>
+                    <td>Seguridad física</td>
+                    <td>Sistemas de control de acceso biométrico, cerraduras electrónicas, videovigilancia 24/7 y personal de seguridad para prevenir accesos no autorizados.</td>
+                    <td>Cumplimiento con la norma ISO/IEC 27001, que especifica los requisitos para establecer controles efectivos de seguridad física y proteger los activos del CPD.</td>
+                </tr>
+                <tr>
+                    <td>Red de datos</td>
+                    <td>Cableado estructurado con estándares de alta calidad, conexiones redundantes y alta capacidad para soportar grandes volúmenes de tráfico de datos.</td>
+                    <td>Utilización de la norma TIA/EIA-568, que define las especificaciones para cableado estructurado y asegura el correcto funcionamiento de las redes.</td>
+                </tr>
+                <tr>
+                    <td>Sistemas contra incendios</td>
+                    <td>Detección temprana de humo mediante sensores de alta sensibilidad y sistemas de supresión de incendios que utilizan gases inertes no dañinos para los equipos.</td>
+                    <td>Cumple con la norma NFPA 75, que especifica medidas de protección contra incendios en entornos de equipos de tecnología de la información.</td>
+                </tr>
+                <tr>
+                    <td>Gestión de infraestructura</td>
+                    <td>Plataformas de software para el monitoreo en tiempo real de la infraestructura, incluyendo el consumo energético, temperatura y rendimiento de los sistemas.</td>
+                    <td>Basado en la norma ISO/IEC 20000, que asegura la calidad en la gestión de servicios de tecnología de la información.</td>
+                </tr>
+                <tr>
+                    <td>Almacenamiento de datos</td>
+                    <td>Uso de sistemas NAS (Network Attached Storage) y SAN (Storage Area Network) para almacenamiento de alta disponibilidad y escalabilidad.</td>
+                    <td>Cumple con la norma ISO/IEC 27040, que proporciona directrices para la protección y seguridad de datos almacenados.</td>
+                </tr>
+                <tr>
+                    <td>Respaldos</td>
+                    <td>Implementación de copias de seguridad automáticas con políticas de retención y almacenamiento en ubicaciones geográficamente separadas.</td>
+                    <td>Conforme a la norma ISO/IEC 27031, que establece un marco para la continuidad del negocio y la recuperación ante desastres.</td>
+                </tr>
+                <tr>
+                    <td>Iluminación</td>
+                    <td>Sistemas de iluminación LED de bajo consumo diseñados para garantizar visibilidad adecuada con reducción del consumo energético.</td>
+                    <td>Cumple con las recomendaciones de las normas OSHA para asegurar condiciones laborales seguras y eficientes.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
