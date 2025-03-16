@@ -3,110 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabla de elementos de un CPD</title>
+    <title>Tipos de Extintores</title>
     <style>
-        /* Configuración del fondo verde bandera y colores del contenido */
         body {
-            background-color: #006847; /* Verde bandera */
-            color: black; /* Color del texto por defecto */
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
         }
-        .contenedor {
-            background-color: white;
-            margin: 20px auto;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 900px;
+        header {
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
         }
-        h1, h2, h3 {
-            color: #000080; /* Azul */
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th {
-            background-color: #FF0000; /* Rojo */
-            color: white;
+        .tabs {
+            display: flex;
+            cursor: pointer;
+            background-color: #f4f4f4;
             padding: 10px;
         }
-        td {
-            border: 1px solid #000; /* Negro */
+        .tab {
+            flex: 1;
+            text-align: center;
             padding: 10px;
+            border: 1px solid #ccc;
+            border-bottom: none;
+            background-color: #e0e0e0;
+        }
+        .tab.active {
+            background-color: #fff;
+            font-weight: bold;
+        }
+        .content {
+            border: 1px solid #ccc;
+            padding: 20px;
+            display: none;
+        }
+        .content.active {
+            display: block;
         }
         img {
-            max-width: 150px;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 10px auto;
         }
     </style>
+    <script>
+        function showContent(id) {
+            const contents = document.querySelectorAll('.content');
+            const tabs = document.querySelectorAll('.tab');
+            contents.forEach(content => content.classList.remove('active'));
+            tabs.forEach(tab => tab.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelector(`[data-tab="${id}"]`).classList.add('active');
+        }
+    </script>
 </head>
 <body>
-    <div class="contenedor">
-        <img src="escudo.png" alt="Escudo UAEM">
-        <h1>Facultad de Contaduría y Administración</h1>
-        <h2>Instalaciones y Seguridad Informática</h2>
-        <h3>Nombre del estudiante: Ángel Brandon Martínez Rodríguez</h3>
-        <h3>Tema: Tabla con los elementos de un CPD</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Elemento</th>
-                    <th>Características</th>
-                    <th>Estándares</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Climatización</td>
-                    <td>Sistemas avanzados de control de temperatura y humedad para garantizar un ambiente óptimo para los equipos. Incluye sensores que monitorean constantemente las condiciones ambientales.</td>
-                    <td>Mantener la temperatura a 23°C con una tolerancia máxima de ±1°C y la humedad relativa entre el 40% y el 60%, conforme a la norma ASHRAE TC 9.9.</td>
-                </tr>
-                <tr>
-                    <td>Alimentación eléctrica</td>
-                    <td>Implementación de fuentes de energía redundantes, sistemas UPS (Uninterruptible Power Supply) y generadores de respaldo para garantizar un suministro continuo de energía.</td>
-                    <td>Basado en las recomendaciones de la norma IEEE 446, que establece las mejores prácticas para sistemas eléctricos de respaldo en centros de datos.</td>
-                </tr>
-                <tr>
-                    <td>Seguridad física</td>
-                    <td>Sistemas de control de acceso biométrico, cerraduras electrónicas, videovigilancia 24/7 y personal de seguridad para prevenir accesos no autorizados.</td>
-                    <td>Cumplimiento con la norma ISO/IEC 27001, que especifica los requisitos para establecer controles efectivos de seguridad física y proteger los activos del CPD.</td>
-                </tr>
-                <tr>
-                    <td>Red de datos</td>
-                    <td>Cableado estructurado con estándares de alta calidad, conexiones redundantes y alta capacidad para soportar grandes volúmenes de tráfico de datos.</td>
-                    <td>Utilización de la norma TIA/EIA-568, que define las especificaciones para cableado estructurado y asegura el correcto funcionamiento de las redes.</td>
-                </tr>
-                <tr>
-                    <td>Sistemas contra incendios</td>
-                    <td>Detección temprana de humo mediante sensores de alta sensibilidad y sistemas de supresión de incendios que utilizan gases inertes no dañinos para los equipos.</td>
-                    <td>Cumple con la norma NFPA 75, que especifica medidas de protección contra incendios en entornos de equipos de tecnología de la información.</td>
-                </tr>
-                <tr>
-                    <td>Gestión de infraestructura</td>
-                    <td>Plataformas de software para el monitoreo en tiempo real de la infraestructura, incluyendo el consumo energético, temperatura y rendimiento de los sistemas.</td>
-                    <td>Basado en la norma ISO/IEC 20000, que asegura la calidad en la gestión de servicios de tecnología de la información.</td>
-                </tr>
-                <tr>
-                    <td>Almacenamiento de datos</td>
-                    <td>Uso de sistemas NAS (Network Attached Storage) y SAN (Storage Area Network) para almacenamiento de alta disponibilidad y escalabilidad.</td>
-                    <td>Cumple con la norma ISO/IEC 27040, que proporciona directrices para la protección y seguridad de datos almacenados.</td>
-                </tr>
-                <tr>
-                    <td>Respaldos</td>
-                    <td>Implementación de copias de seguridad automáticas con políticas de retención y almacenamiento en ubicaciones geográficamente separadas.</td>
-                    <td>Conforme a la norma ISO/IEC 27031, que establece un marco para la continuidad del negocio y la recuperación ante desastres.</td>
-                </tr>
-                <tr>
-                    <td>Iluminación</td>
-                    <td>Sistemas de iluminación LED de bajo consumo diseñados para garantizar visibilidad adecuada con reducción del consumo energético.</td>
-                    <td>Cumple con las recomendaciones de las normas OSHA para asegurar condiciones laborales seguras y eficientes.</td>
-                </tr>
-            </tbody>
-        </table>
+
+    <!-- Portada -->
+    <header>
+        <img src="escudo.pnG" alt="Escudo UAEM" style="width: 150px;">
+        <h1>Universidad Autónoma del Estado de México</h1>
+        <h2>Licenciatura en Informática Administrativa</h2>
+        <h3>Materia: Instalaciones y Seguridad Informática</h3>
+        <h3>Nombre: Ángel Brandon Martínez Rodríguez</h3>
+        <h3>Tema: Tipos de Extintores</h3>
+    </header>
+
+    <hr>
+
+    <!-- Contenido con pestañas -->
+    <h1>Tipos de Extintores</h1>
+    <div class="tabs">
+        <div class="tab active" data-tab="co2" onclick="showContent('co2')">Extintor de CO₂</div>
+        <div class="tab" data-tab="polvo" onclick="showContent('polvo')">Extintor de Polvo Químico</div>
+        <div class="tab" data-tab="agua" onclick="showContent('agua')">Extintor de Agua</div>
+        <div class="tab" data-tab="espuma" onclick="showContent('espuma')">Extintor de Espuma</div>
+        <div class="tab" data-tab="halon" onclick="showContent('halon')">Extintor de Halón</div>
     </div>
+
+    <div id="co2" class="content active">
+        <h2>Extintor de CO₂</h2>
+        <p><strong>Apto para Material Eléctrico:</strong> Sí</p>
+        <p><strong>Características:</strong> No deja residuos, es limpio y no conductor.</p>
+        <p><strong>Componentes:</strong> Dióxido de carbono comprimido.</p>
+        <img src="CO2.jpg" alt="CARBONO">
+    </div>
+
+    <div id="polvo" class="content">
+        <h2>Extintor de Polvo Químico Seco</h2>
+        <p><strong>Apto para Material Eléctrico:</strong> A veces (si es clase C)</p>
+        <p><strong>Características:</strong> Versátil, adecuado para fuegos clase A, B y C.</p>
+        <p><strong>Componentes:</strong> Polvo químico (fosfato monoamónico).</p>
+        <img src="Extintor de Polvo Químico Seco.jpg" alt="POLVO">
+    </div>
+
+    <div id="agua" class="content">
+        <h2>Extintor de Agua</h2>
+        <p><strong>Apto para Material Eléctrico:</strong> No</p>
+        <p><strong>Características:</strong> Solo para fuegos de clase A (combustibles sólidos).</p>
+        <p><strong>Componentes:</strong> Agua presurizada.</p>
+        <img src="Extintor de Agua.jpg" alt="AGUA">
+    </div>
+
+    <div id="espuma" class="content">
+        <h2>Extintor de Espuma</h2>
+        <p><strong>Apto para Material Eléctrico:</strong> No</p>
+        <p><strong>Características:</strong> Efectivo en líquidos inflamables (clase B).</p>
+        <p><strong>Componentes:</strong> Agente espumante y agua.</p>
+        <img src="Extintor de Espuma.jpg" alt="ESPUMA">
+    </div>
+
+    <div id="halon" class="content">
+        <h2>Extintor de Halón</h2>
+        <p><strong>Apto para Material Eléctrico:</strong> Sí</p>
+        <p><strong>Características:</strong> Limpio y no conductor, sustituido por gases ecológicos.</p>
+        <p><strong>Componentes:</strong> Halón o agente halogenado.</p>
+        <img src="Extintor de Halón.jpg" alt="HALON">
+    </div>
+
 </body>
 </html>
