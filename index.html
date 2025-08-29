@@ -2,33 +2,29 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Rosas para Joss</title>
+  <title>🌧️ Rosas bajo la lluvia</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       height: 100vh;
-      background-color: aqua;
+      background-color: #0a2a4f; /* azul oscuro */
       overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
       position: relative;
+      font-family: sans-serif;
     }
 
     h1 {
       position: relative;
-      font-size: 3rem;
+      font-size: 2.5rem;
       color: white;
-      text-shadow: 0 0 10px #fff, 0 0 20px #ff4d4d, 0 0 30px #ff1a1a;
+      text-align: center;
       z-index: 10;
-      animation: shine 2s infinite alternate;
-    }
-
-    @keyframes shine {
-      from { text-shadow: 0 0 5px #fff, 0 0 10px #ff4d4d; }
-      to { text-shadow: 0 0 20px #fff, 0 0 40px #ff1a1a; }
+      text-shadow: 0 0 10px #fff;
     }
 
     .container {
@@ -49,42 +45,69 @@
       0%, 100% { transform: translateY(0) scale(1); }
       50% { transform: translateY(-20px) scale(1.05); }
     }
+
+    .rain {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .drop {
+      position: absolute;
+      width: 2px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.3);
+      animation: fall 1s linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-100px); opacity: 0.5; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
   </style>
 </head>
 <body>
-  <h1>✨ Espero que hayas tenido un gran día Joss ✨</h1>
+  <h1>Espero que nos podamos seguir viendo.<br>Me gustas mucho 😔</h1>
   <div class="container" id="container"></div>
+  <div class="rain" id="rain"></div>
 
   <script>
     const container = document.getElementById('container');
+    const rain = document.getElementById('rain');
 
-    // Definimos el SVG de la rosa como plantilla
     const roseSVG = `
       <svg xmlns="http://www.w3.org/2000/svg" width="120" height="200" viewBox="0 0 120 200">
-        <!-- tallo -->
         <rect x="58" y="80" width="4" height="120" fill="green"/>
-        <!-- hojas -->
         <ellipse cx="50" cy="120" rx="20" ry="10" fill="green"/>
         <ellipse cx="70" cy="150" rx="20" ry="10" fill="green"/>
-        <!-- pétalos -->
-        <circle cx="60" cy="60" r="30" fill="red"/>
+        <circle cx="60" cy="60" r="30" fill="#ff0000"/>
         <circle cx="45" cy="55" r="20" fill="#cc0000"/>
         <circle cx="75" cy="55" r="20" fill="#cc0000"/>
-        <circle cx="60" cy="40" r="20" fill="#b30000"/>
-        <circle cx="60" cy="70" r="20" fill="#e60000"/>
+        <circle cx="60" cy="40" r="20" fill="#990000"/>
+        <circle cx="60" cy="70" r="20" fill="#ff1a1a"/>
       </svg>`;
 
-    // Generar muchas rosas en la página
     for (let i = 0; i < 40; i++) {
       const rose = document.createElement('div');
       rose.classList.add('rose');
       rose.innerHTML = roseSVG;
       rose.style.top = Math.random() * 100 + "%";
       rose.style.left = Math.random() * 100 + "%";
-      let scale = Math.random() * 0.6 + 0.4; // tamaños variados
+      let scale = Math.random() * 0.6 + 0.4;
       rose.style.transform = `scale(${scale})`;
       rose.style.animationDelay = (Math.random() * 6) + "s";
       container.appendChild(rose);
+    }
+
+    for (let i = 0; i < 100; i++) {
+      const drop = document.createElement('div');
+      drop.classList.add('drop');
+      drop.style.left = Math.random() * 100 + "%";
+      drop.style.top = Math.random() * -100 + "px";
+      drop.style.animationDelay = Math.random() + "s";
+      rain.appendChild(drop);
     }
   </script>
 </body>
