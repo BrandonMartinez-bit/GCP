@@ -23,6 +23,24 @@
       z-index: 1;
     }
 
+    /* BOTÓN PARA INICIAR MÚSICA */
+    #playMusic {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      z-index: 5;
+      padding: 10px 20px;
+      background: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(255,105,180,0.8);
+    }
+
+    #playMusic:hover { transform: scale(1.05); }
+
     audio { display: none; }
 
     .content {
@@ -192,21 +210,24 @@
 
 <body>
 
-  <!-- 🔊 AUDIO AUTOMÁTICO (YA SIN BOTÓN) -->
-  <audio id="bgMusic" src="AQUÍ_VA_TU_AUDIO.mp3" autoplay loop></audio>
+  <!-- 🔊 AQUÍ INSERTAS TU AUDIO EXTERNO -->
+  <!-- SOLO CAMBIA "AQUÍ_VA_TU_AUDIO.mp3" POR TU ARCHIVO O URL -->
+  <audio id="bgMusic" src="AQUÍ_VA_TU_AUDIO.mp3"></audio>
+
+  <button id="playMusic">🎵 REPRODUCIR MÚSICA</button>
 
   <div class="overlay"></div>
 
   <div class="content">
     <div class="scroll-container">
       <div class="scroll-text">
-TE LO QUE HERIDO DECIR DE MIL FORMAS Y MIL MANERAS
+TE LO HE QUERIDO DECIR DE MIL FORMAS Y MIL MANERAS
 PERO TODAS PARECEN SIMPLES Y NADA BUENAS
 ASI QUE DECIDÍ REGRESAR A LO SIMPLE Y HONESTO
 PARA PODER DEDICARTE UN PAR DE VERSOS
 
 LLEVAMOS TIEMPO SALIENDO Y ESO ME MOVÍA
-ERES BONITA HERMOSA Y DESDE SIEMPRE YA TE QUERÍA
+ERES BONITA, HERMOSA Y DESDE SIEMPRE YA TE QUERÍA
 ERES MI PRINCESA, MI AMOR Y MI QUERIDA
 PERO HOY QUIERO QUE SEAS MI NOVIA
       </div>
@@ -223,9 +244,14 @@ PERO HOY QUIERO QUE SEAS MI NOVIA
   </div>
 
   <script>
-    // Música automática
+    // Música
+    const playBtn = document.getElementById("playMusic");
     const music = document.getElementById("bgMusic");
-    music.volume = 1;
+
+    playBtn.addEventListener("click", () => {
+      music.play();
+      playBtn.style.display = "none";
+    });
 
     // Corazones
     function createHeart() {
@@ -255,7 +281,7 @@ PERO HOY QUIERO QUE SEAS MI NOVIA
     setInterval(createSparkle, 500);
 
     // Letras volando
-    const letras = ["A", "❤", "TÚ", "YO"];
+    const letras = ["A", "M", "O", "R", "❤", "TÚ", "YO"];
     function createLetter() {
       const letter = document.createElement("div");
       letter.classList.add("flying-letter");
