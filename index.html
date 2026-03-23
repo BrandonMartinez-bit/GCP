@@ -1,114 +1,319 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>🌧️ Rosas bajo la lluvia</title>
+  <meta charset="UTF-8" />
+  <title>¿QUIERES SER MI NOVIA?</title>
+
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      margin: 0;
-      padding: 0;
       height: 100vh;
-      background-color: #0a2a4f; /* azul oscuro */
       overflow: hidden;
+      font-family: "Segoe UI", sans-serif;
+      color: #fff;
+      background: radial-gradient(circle at top left, #ffb6e6 0%, #ff69b4 30%, #32cd32 80%);
+      position: relative;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 80%);
+      z-index: 1;
+    }
+
+    /* BOTÓN PARA INICIAR MÚSICA */
+    #playMusic {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      z-index: 5;
+      padding: 10px 20px;
+      background: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(255,105,180,0.8);
+    }
+
+    #playMusic:hover { transform: scale(1.05); }
+
+    audio { display: none; }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      height: 100vh;
       display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .scroll-container {
+      position: relative;
+      width: min(800px, 90vw);
+      height: 60vh;
+      overflow: hidden;
+      border-radius: 20px;
+      padding: 20px 30px;
+      background: rgba(0, 0, 0, 0.35);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(6px);
+    }
+
+    .scroll-text {
+      position: absolute;
+      width: 100%;
+      font-size: 1.6rem;
+      line-height: 1.6;
+      animation: scrollUp 40s linear forwards;
+      white-space: pre-line;
+      text-transform: uppercase;
+    }
+
+    @keyframes scrollUp {
+      0% { transform: translateY(100%); }
+      100% { transform: translateY(-120%); }
+    }
+
+    .question-box {
+      margin-top: 20px;
+      padding: 15px 25px;
+      border-radius: 15px;
+      background: rgba(0, 0, 0, 0.55);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      display: inline-block;
+      position: relative;
+    }
+
+    .question-box h2 {
+      margin-bottom: 10px;
+      font-size: 1.8rem;
+      color: #ffe4f7;
+      text-transform: uppercase;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
       position: relative;
-      font-family: sans-serif;
     }
 
-    h1 {
+    .btn {
+      padding: 8px 20px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: 0.2s;
+      text-transform: uppercase;
+    }
+
+    .btn-si {
+      background: #ff69b4;
+      color: #fff;
+      box-shadow: 0 0 12px rgba(255, 105, 180, 0.7);
+    }
+
+    .btn-no {
+      background: #32cd32;
+      color: #fff;
+      box-shadow: 0 0 12px rgba(50, 205, 50, 0.7);
       position: relative;
-      font-size: 2.5rem;
-      color: white;
-      text-align: center;
-      z-index: 10;
-      text-shadow: 0 0 10px #fff;
     }
 
-    .container {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: 1;
-      pointer-events: none;
+    .felices {
+      margin-top: 15px;
+      font-size: 1.4rem;
+      color: #ffe4f7;
+      font-weight: 700;
+      text-transform: uppercase;
     }
 
-    .rose {
-      position: absolute;
-      transform-origin: center;
-      animation: float 6s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-20px) scale(1.05); }
-    }
-
-    .rain {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    .drop {
-      position: absolute;
-      width: 2px;
+    /* CORAZONES */
+    .heart {
+      position: fixed;
+      width: 20px;
       height: 20px;
-      background: rgba(255, 255, 255, 0.3);
-      animation: fall 1s linear infinite;
+      background: radial-gradient(circle at 30% 30%, #fff 0%, #ff69b4 40%, #ff1493 70%);
+      transform: rotate(45deg);
+      animation: floatUp 8s linear infinite;
+      opacity: 0.8;
+      pointer-events: none;
+      z-index: 0;
     }
 
-    @keyframes fall {
-      0% { transform: translateY(-100px); opacity: 0.5; }
-      100% { transform: translateY(100vh); opacity: 0; }
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: inherit;
+      border-radius: 50%;
+    }
+
+    .heart::before { top: -10px; left: 0; }
+    .heart::after { left: -10px; top: 0; }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(45deg); opacity: 0; }
+      10% { opacity: 0.9; }
+      100% { transform: translateY(-120vh) rotate(45deg); opacity: 0; }
+    }
+
+    /* DESTELLOS */
+    .sparkle {
+      position: fixed;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 8px #fff, 0 0 15px #ffb6e6, 0 0 25px #ff69b4;
+      animation: twinkle 3s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0; transform: scale(0.4); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* LETRAS VOLANDO */
+    .flying-letter {
+      position: fixed;
+      font-size: 2rem;
+      font-weight: bold;
+      color: rgba(255,255,255,0.8);
+      animation: fly 6s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes fly {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
     }
   </style>
 </head>
+
 <body>
-  <h1>Espero que nos podamos seguir viendo.<br>Me gustas mucho 😔</h1>
-  <div class="container" id="container"></div>
-  <div class="rain" id="rain"></div>
+
+  <!-- 🔊 AQUÍ INSERTAS TU AUDIO EXTERNO -->
+  <!-- SOLO CAMBIA "AQUÍ_VA_TU_AUDIO.mp3" POR TU ARCHIVO O URL -->
+  <audio id="bgMusic" src="AQUÍ_VA_TU_AUDIO.mp3"></audio>
+
+  <button id="playMusic">🎵 REPRODUCIR MÚSICA</button>
+
+  <div class="overlay"></div>
+
+  <div class="content">
+    <div class="scroll-container">
+      <div class="scroll-text">
+TE LO QUE HERIDO DECIR DE MIL FORMAS Y MIL MANERAS
+PERO TODAS PARECEN SIMPLES Y NADA BUENAS
+ASI QUE DECIDÍ REGRESAR A LO SIMPLE Y HONESTO
+PARA PODER DEDICARTE UN PAR DE VERSOS
+
+LLEVAMOS TIEMPO SALIENDO Y ESO ME MOVÍA
+ERES BONITA HERMOSA Y DESDE SIEMPRE YA TE QUERÍA
+ERES MI PRINCESA, MI AMOR Y MI QUERIDA
+PERO HOY QUIERO QUE SEAS MI NOVIA
+      </div>
+    </div>
+
+    <div class="question-box" id="questionBox">
+      <h2>¿ACEPTAS?</h2>
+      <div class="buttons">
+        <button class="btn btn-si" id="btnSi">SÍ</button>
+        <button class="btn btn-no" id="btnNo">NO</button>
+      </div>
+      <div class="felices" id="felicesMsg"></div>
+    </div>
+  </div>
 
   <script>
-    const container = document.getElementById('container');
-    const rain = document.getElementById('rain');
+    // Música
+    const playBtn = document.getElementById("playMusic");
+    const music = document.getElementById("bgMusic");
 
-    const roseSVG = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="200" viewBox="0 0 120 200">
-        <rect x="58" y="80" width="4" height="120" fill="green"/>
-        <ellipse cx="50" cy="120" rx="20" ry="10" fill="green"/>
-        <ellipse cx="70" cy="150" rx="20" ry="10" fill="green"/>
-        <circle cx="60" cy="60" r="30" fill="#ff0000"/>
-        <circle cx="45" cy="55" r="20" fill="#cc0000"/>
-        <circle cx="75" cy="55" r="20" fill="#cc0000"/>
-        <circle cx="60" cy="40" r="20" fill="#990000"/>
-        <circle cx="60" cy="70" r="20" fill="#ff1a1a"/>
-      </svg>`;
+    playBtn.addEventListener("click", () => {
+      music.play();
+      playBtn.style.display = "none";
+    });
 
-    for (let i = 0; i < 40; i++) {
-      const rose = document.createElement('div');
-      rose.classList.add('rose');
-      rose.innerHTML = roseSVG;
-      rose.style.top = Math.random() * 100 + "%";
-      rose.style.left = Math.random() * 100 + "%";
-      let scale = Math.random() * 0.6 + 0.4;
-      rose.style.transform = `scale(${scale})`;
-      rose.style.animationDelay = (Math.random() * 6) + "s";
-      container.appendChild(rose);
+    // Corazones
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      const size = Math.random() * 20 + 15;
+      heart.style.width = size + "px";
+      heart.style.height = size + "px";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.bottom = "-40px";
+      heart.style.animationDuration = 6 + Math.random() * 6 + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 12000);
     }
+    setInterval(createHeart, 600);
 
-    for (let i = 0; i < 100; i++) {
-      const drop = document.createElement('div');
-      drop.classList.add('drop');
-      drop.style.left = Math.random() * 100 + "%";
-      drop.style.top = Math.random() * -100 + "px";
-      drop.style.animationDelay = Math.random() + "s";
-      rain.appendChild(drop);
+    // Destellos
+    function createSparkle() {
+      const sparkle = document.createElement("div");
+      sparkle.classList.add("sparkle");
+      sparkle.style.left = Math.random() * 100 + "vw";
+      sparkle.style.top = Math.random() * 100 + "vh";
+      sparkle.style.animationDuration = 2 + Math.random() * 3 + "s";
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 5000);
     }
+    setInterval(createSparkle, 500);
+
+    // Letras volando
+    const letras = ["A", "❤", "TÚ", "YO"];
+    function createLetter() {
+      const letter = document.createElement("div");
+      letter.classList.add("flying-letter");
+      letter.textContent = letras[Math.floor(Math.random() * letras.length)];
+      letter.style.left = Math.random() * 100 + "vw";
+      letter.style.bottom = "-40px";
+      letter.style.animationDuration = 4 + Math.random() * 4 + "s";
+      document.body.appendChild(letter);
+      setTimeout(() => letter.remove(), 9000);
+    }
+    setInterval(createLetter, 700);
+
+    // Botones
+    const btnSi = document.getElementById("btnSi");
+    const btnNo = document.getElementById("btnNo");
+    const felicesMsg = document.getElementById("felicesMsg");
+    const questionBox = document.getElementById("questionBox");
+
+    btnSi.addEventListener("click", () => {
+      felicesMsg.textContent = "ESTE ES NUESTRO FELICES PARA SIEMPRE 💖";
+    });
+
+    btnNo.addEventListener("mouseover", () => {
+      const boxRect = questionBox.getBoundingClientRect();
+      const btnRect = btnNo.getBoundingClientRect();
+      const maxX = boxRect.width - btnRect.width - 10;
+      const maxY = boxRect.height - btnRect.height - 40;
+      btnNo.style.position = "absolute";
+      btnNo.style.left = Math.random() * maxX + "px";
+      btnNo.style.top = Math.random() * maxY + 30 + "px";
+    });
   </script>
+
 </body>
 </html>
